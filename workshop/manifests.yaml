@@ -50,23 +50,18 @@ spec:
       - name: mongo
         image: mongo:${MONGO_IMAGE_TAG}
         ports:
-          - containerPort: 27017
+        - containerPort: 27017
         env:
-          - name: MONGO_INITDB_ROOT_USERNAME
-            value: "${MONGO_ROOT_USERNAME}"
-          - name: MONGO_INITDB_ROOT_PASSWORD
-            value: "${MONGO_ROOT_PASSWORD}"
-        volumeMounts:
-          - name: data
-            mountPath: /data/db
-  volumeClaimTemplates:
+        - name: MONGO_INITDB_ROOT_USERNAME
+          value: "${MONGO_ROOT_USERNAME}"
+        - name: MONGO_INITDB_ROOT_PASSWORD
+          value: "${MONGO_ROOT_PASSWORD}"
         volumeMounts:
         - name: data
           mountPath: /data/db
-  volumes:
-    - name: data
-      emptyDir: {}
-
+      volumes:
+      - name: data
+        emptyDir: {}
 ---
 # Backend Deployment
 apiVersion: apps/v1
