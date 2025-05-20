@@ -81,6 +81,18 @@ spec:
       labels:
         app: idurar-backend
     spec:
+      initContainers:
+      - name: wait-for-mongo
+        image: busybox:1.34
+        command:
+          - sh
+          - -c
+          - |
+            until nc -z mongo.${NAMESPACE}.svc.cluster.local 27017; do
+              echo "waiting for mongo..."
+              sleep 2
+            done
+            
       containers:
       - name: idurar-backend
         image: ${BACKEND_IMAGE}:${BACKEND_IMAGE_TAG}

@@ -44,8 +44,9 @@ kubectl apply -f xx01
 API_URL="http://$LB_HOST:8888/"
 echo "🔧 Patching Frontend Deployment env REACT_APP_API_URL=$API_URL..."
 kubectl set env deployment/idurar-frontend \
-  -n "$NAMESPACE" \
-  VITE_BACKEND_SERVER="$API_URL"
+  -n idurar-demo \
+  VITE_DEV_REMOTE=remote \
+  VITE_BACKEND_SERVER="http://$LB_HOST:8888/"
 
 # Roll out a restart so the Vite dev server picks up the new env var
 kubectl rollout restart deployment/idurar-frontend -n "$NAMESPACE"
