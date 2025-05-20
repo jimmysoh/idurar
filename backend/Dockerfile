@@ -17,7 +17,7 @@ EXPOSE 8888
 
 # Set environment variables
 ENV NODE_ENV=development
-ENV DATABASE=mongodb://x.x.x.x:27017/
+ENV DATABASE=mongodb://root:ChangeMe123@mongo:27017/
 ENV NODE_OPTIONS=--openssl-legacy-provider
 ENV DD_TRACE_AGENT_URL=https://rum.x.x
 

@@ -92,7 +92,13 @@ spec:
               echo "waiting for mongo..."
               sleep 2
             done
-            
+      - name: seed-database
+        image: ${BACKEND_IMAGE}:${BACKEND_IMAGE_TAG}
+        command: ["npm", "run", "setup"]
+        env:
+          - name: DATABASE
+            value: "mongodb://${MONGO_ROOT_USERNAME}:${MONGO_ROOT_PASSWORD}@mongo.${NAMESPACE}.svc.cluster.local:27017/${MONGO_DATABASE}?authSource=admin"
+
       containers:
       - name: idurar-backend
         image: ${BACKEND_IMAGE}:${BACKEND_IMAGE_TAG}
