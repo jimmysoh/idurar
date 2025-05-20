@@ -149,7 +149,7 @@ spec:
         env:
           - name: NODE_ENV
             value: "${NODE_ENV}"
-          - name: REACT_APP_API_URL
+          - name: VITE_BACKEND_SERVER
             value: "${API_URL}"
           - name: NODE_OPTIONS
             value: "${NODE_OPTIONS}"

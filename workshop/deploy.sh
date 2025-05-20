@@ -41,11 +41,14 @@ echo "🚀 Deploying Frontend Service and Deployment..."
 kubectl apply -f xx01
 
 # 8. Dynamically patch Frontend Deployment’s API_URL
-API_URL="http://$LB_HOST"
+API_URL="http://$LB_HOST:8888/"
 echo "🔧 Patching Frontend Deployment env REACT_APP_API_URL=$API_URL..."
 kubectl set env deployment/idurar-frontend \
   -n "$NAMESPACE" \
-  REACT_APP_API_URL="$API_URL"
+  VITE_BACKEND_SERVER="$API_URL"
+
+# Roll out a restart so the Vite dev server picks up the new env var
+kubectl rollout restart deployment/idurar-frontend -n "$NAMESPACE"
 
 # 9. Clean up temp files
 rm xx00 xx01 "$RENDERED"
