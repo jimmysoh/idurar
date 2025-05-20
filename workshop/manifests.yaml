@@ -60,13 +60,12 @@ spec:
           - name: data
             mountPath: /data/db
   volumeClaimTemplates:
-    - metadata:
-        name: data
-      spec:
-        accessModes: ["ReadWriteOnce"]
-        resources:
-          requests:
-            storage: ${MONGO_STORAGE}
+        volumeMounts:
+        - name: data
+          mountPath: /data/db
+  volumes:
+    - name: data
+      emptyDir: {}
 
 ---
 # Backend Deployment

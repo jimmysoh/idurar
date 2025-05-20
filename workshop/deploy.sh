@@ -36,16 +36,16 @@ until LB_HOST=$(kubectl get svc idurar-backend -n "$NAMESPACE" \
 done
 echo -e "\n✅ Backend LB hostname: $LB_HOST"
 
-# 7. Dynamically patch Frontend Deployment’s API_URL
+# 7. Apply the second chunk: Frontend Service & Deployment
+echo "🚀 Deploying Frontend Service and Deployment..."
+kubectl apply -f xx01
+
+# 8. Dynamically patch Frontend Deployment’s API_URL
 API_URL="http://$LB_HOST"
 echo "🔧 Patching Frontend Deployment env REACT_APP_API_URL=$API_URL..."
 kubectl set env deployment/idurar-frontend \
   -n "$NAMESPACE" \
   REACT_APP_API_URL="$API_URL"
-
-# 8. Apply the second chunk: Frontend Service & Deployment
-echo "🚀 Deploying Frontend Service and Deployment..."
-kubectl apply -f xx01
 
 # 9. Clean up temp files
 rm xx00 xx01 "$RENDERED"
