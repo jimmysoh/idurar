@@ -1,7 +1,29 @@
 require('module-alias/register');
+const tracer = require('dd-trace').init();
 const mongoose = require('mongoose');
 const { globSync } = require('glob');
 const path = require('path');
+
+// Initialize Profiling 
+const Pyroscope = require('@pyroscope/nodejs');
+
+Pyroscope.init({
+  serverAddress: 'http://10.66.0.4:4040',
+  appName: 'iDURAR',
+  tags: {
+    region: 'sg'
+  }
+});
+
+Pyroscope.start();
+
+// Initialize APM
+console.log(`DD-Trace is configured to send data to ${tracer._tracer._url}`);
+tracer.use('http', {
+  clientErrorHook: (error) => {
+      console.error('Error occurred in dd-trace http client:', error);
+  }
+});
 
 // Make sure we are running node 7.6+
 const [major, minor] = process.versions.node.split('.').map(parseFloat);
