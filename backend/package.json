@@ -6,7 +6,7 @@
     "node": "20.9.0"
   },
   "scripts": {
-    "start": "node src/server.js",
+    "start": "DD_AGENT_HOST=localhost DD_TRACE_AGENT_PORT=9529 node src/server.js",
     "dev": "nodemon src/server.js --ignore public/",
     "production": "NODE_ENV=production",
     "setup": "node src/setup/setup.js",
