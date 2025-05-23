@@ -131,6 +131,8 @@ kind: Service
 metadata:
   name: idurar-backend
   namespace: ${NAMESPACE}
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-scheme: internet-facing
 spec:
   type: LoadBalancer
   selector:
@@ -181,6 +183,8 @@ kind: Service
 metadata:
   name: idurar-frontend
   namespace: ${NAMESPACE}
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-scheme: internet-facing
 spec:
   type: LoadBalancer
   selector:
