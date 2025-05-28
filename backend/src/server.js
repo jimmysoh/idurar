@@ -8,7 +8,7 @@ const path = require('path');
 const Pyroscope = require('@pyroscope/nodejs');
 
 Pyroscope.init({
-  serverAddress: 'http://10.66.0.4:4040',
+  serverAddress: process.env.DD_TRACE_AGENT_HOSTNAME,
   appName: 'iDURAR',
   tags: {
     region: 'sg'
