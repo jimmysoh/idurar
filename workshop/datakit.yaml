@@ -99,6 +99,10 @@ spec:
     - protocol: UDP
       port: 8125
       name: statsd
+    - name: profile
+      protocol: TCP
+      port: 4040
+      targetPort: 4040
 
 ---
 
@@ -220,6 +224,10 @@ spec:
           hostPort: 8125
           name: statsd
           protocol: UDP
+        - name: profile
+          containerPort: 4040
+          hostPort: 4040
+          protocol: TCP
         resources:
           requests:
             cpu: "200m"
