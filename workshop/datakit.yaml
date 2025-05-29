@@ -243,6 +243,10 @@ spec:
           name: debugfs
         - mountPath: /var/lib/containerd/container_logs
           name: container-logs
+        - name: datakit-conf
+          mountPath: /usr/local/datakit/conf.d/profile.conf
+          subPath: profile.conf
+          readOnly: true
         # # ---iploc-start
         #- mountPath: /usr/local/datakit/data/ipdb/iploc/
         #  name: datakit-ipdb
@@ -286,9 +290,9 @@ spec:
       tolerations:
       - operator: Exists
       volumes:
-      - configMap:
+      - name: datakit-conf
+        configMap:
           name: datakit-conf
-        name: datakit-conf
       # - name: hellopythond
       #   configMap:
       #     name: python-scripts
@@ -340,6 +344,14 @@ data:
     #     cmd = "python3" # required. python3 is recommended.
     #     # Python scripts relative path
     #     dirs = ["hellopythond"]
+    profile.conf: |-
+      [[inputs.profile.pyroscope]]
+        # listen url
+        url = "0.0.0.0:4040"
+        addr = "http://${DD_TRACE_AGENT_HOSTNAME}:${DD_TRACE_AGENT_PORT}"
+        service = "idurar"
+        env = "dev"
+        version = "0.0.0"
 ---
 
 # apiVersion: v1
