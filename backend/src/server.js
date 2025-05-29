@@ -7,8 +7,10 @@ const path = require('path');
 // Initialize Profiling 
 const Pyroscope = require('@pyroscope/nodejs');
 
+const serverAddress = `http://${process.env.DD_TRACE_AGENT_HOSTNAME}:4040`;
+
 Pyroscope.init({
-  serverAddress: process.env.DD_TRACE_AGENT_HOSTNAME,
+  serverAddress: serverAddress,
   appName: 'iDURAR',
   tags: {
     region: 'sg'
@@ -16,6 +18,8 @@ Pyroscope.init({
 });
 
 Pyroscope.start();
+
+console.log(`Pyroscope sending profiling data to ${serverAddress}`);
 
 // Initialize APM
 console.log(`DD-Trace is configured to send data to ${tracer._tracer._url}`);

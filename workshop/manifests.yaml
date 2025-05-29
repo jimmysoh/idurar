@@ -115,6 +115,8 @@ spec:
             value: "${DD_TRACE_AGENT_URL}"
           - name: DD_TRACE_AGENT_PORT
             value: "${DD_TRACE_AGENT_PORT}"
+          - name: DD_TRACE_AGENT_HOSTNAME
+            value: "${DD_TRACE_AGENT_HOSTNAME}"
           - name: DD_SERVICE
             value: "${DD_SERVICE}"
           - name: DD_VERSION
