@@ -16,7 +16,7 @@ datafluxRum.init({
     compressIntakeRequests: true,
     trackInteractions: true,
     traceType: 'ddtrace', // Not required, default to ddtrace. Currently, it supports 6 types: ddtrace, zipkin, skywalking_v3, jaeger, zipkin_single_header and w3c_traceparent.
-    allowedTracingOrigins: [/http:\/\/.*\.us-east-1\.elb\.amazonaws\.com/],  // Not required; allow all requests to be injected into the header required by the trace collector. It can be the origin of the request or it can be regular.
+    allowedTracingOrigins: [/http:\/\/.*\.ap-southeast-1\.elb\.amazonaws\.com/],  // Not required; allow all requests to be injected into the header required by the trace collector. It can be the origin of the request or it can be regular.
 });
 datafluxRum.startSessionReplayRecording()
 
